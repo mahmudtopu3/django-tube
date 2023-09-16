@@ -1,0 +1,38 @@
+# Python virtual environment directories
+venv/
+vnv/
+
+# Cache files
+__pycache__/
+*.pyc
+
+# Django database file
+db.sqlite3
+
+# Ignore any local settings files (customize this if needed)
+*.env
+
+# Ignore IDE-specific files (customize this if needed)
+.idea/
+.vscode/
+
+# Ignore user-specific files and directories
+*.log
+*.swp
+.DS_Store
+
+# Ignore compiled Python files
+*.pyc
+
+# Ignore environment-specific files
+.env
+
+#media 
+media/
+*.mp4
+*.ts 
+*.m3u8
+
+
+
+
