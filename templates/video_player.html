@@ -27,7 +27,7 @@
         <div class="col-md-12 mx-auto " style="background-color:lavender; height: 100vh;">
             <div class="video-container ">
                 <!-- Video.js player -->
-                <video id="hls-video" class="video-js vjs-default-skin text-center" controls preload="auto" width="640" height="360">
+                <video id="hls-video" class="video-js vjs-default-skin text-center" controls preload="auto" width="640" height="360" autoplay>
                     <!-- HLS source URL -->
                     <source src="{{ hls_url }}" type="application/x-mpegURL">
                     <!-- Fallback for non-supported browsers -->
@@ -35,6 +35,7 @@
                         To view this video, please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
                     </p>
                 </video>
+                
             </div>
         </div>
     </div>
