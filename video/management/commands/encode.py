@@ -1,5 +1,6 @@
 import subprocess
 import os
+import json
 from django.core.management.base import BaseCommand, CommandError
 
 from video.models import Video
@@ -10,6 +11,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         try:
             obj = Video.objects.filter(status='Pending').first()
+            obj = Video.objects.first()
             if obj:
                 obj.status = 'Processing'
                 obj.save()
@@ -18,6 +20,28 @@ class Command(BaseCommand):
                 os.makedirs(output_directory, exist_ok=True)
                 output_filename = os.path.splitext(os.path.basename(input_video_path))[0] + '_hls.m3u8'
                 output_hls_path = os.path.join(output_directory, output_filename)
+
+                # getting video duration/length
+
+                command = [
+                    "ffprobe",
+                    "-v", "quiet",
+                    "-print_format", "json",
+                    "-show_streams",
+                    input_video_path
+                ]
+                result = subprocess.run(command, shell=False,
+                                        check=True, stdout=subprocess.PIPE)
+                output_json = json.loads(result.stdout)
+
+                video_length = None
+                for stream in output_json['streams']:
+                    if stream['codec_type'] == 'video':
+                        video_length = float(stream['duration'])
+                        break
+
+                if video_length is not None:
+                    obj.duration = video_length
                
 
                 # Use ffmpeg to create HLS segments
@@ -28,7 +52,8 @@ class Command(BaseCommand):
                     '-c:a', 'aac',
                     '-hls_time', '5',
                     '-hls_list_size', '0',
-                    '-hls_segment_filename', os.path.join(output_directory, f'{os.path.splitext(output_filename)[0]}_%03d.ts'),
+                    "-hls_base_url", "{{ dynamic_path }}/",
+                    "-movflags", "+faststart",
                     output_hls_path
                 ]
 

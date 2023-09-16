@@ -26,6 +26,8 @@ class Video(models.Model):
     slug = models.SlugField(max_length=500, blank=True)
     description = models.TextField()
     video = models.FileField(upload_to="videos",validators=[validate_mp4_extension])
+    thumbnail = models.ImageField(upload_to="thumbnails",null=True,blank=True)
+    duration = models.CharField(max_length=20, blank=True,null=True)
     hls = models.CharField(max_length=500,blank=True,null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=PENDING)
     is_running = models.BooleanField(default=False)
