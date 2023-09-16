@@ -19,8 +19,12 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
+from video.views import hls_video_player, serve_hls_playlist,serve_hls_segment
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('videos/<int:video_id>/', hls_video_player, name='hls_video_player'),
+    path('serve_hls_playlist/<int:video_id>/', serve_hls_playlist, name='serve_hls_playlist'),
+    path('serve_hls_segment/<int:video_id>/<str:segment_name>/',serve_hls_segment, name='serve_hls_segment'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

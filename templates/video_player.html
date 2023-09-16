@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HLS Video Player</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- Include Video.js CSS -->
+    <link href="https://vjs.zencdn.net/7.14.3/video-js.css" rel="stylesheet">
+    <!-- Include Video.js JavaScript -->
+    <script src="https://vjs.zencdn.net/7.14.3/video.js"></script>
+</head>
+<style>
+ .video-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+</style>
+<body>
+    
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 mx-auto " style="background-color:lavender; height: 100vh;">
+            <div class="video-container ">
+                <!-- Video.js player -->
+                <video id="hls-video" class="video-js vjs-default-skin text-center" controls preload="auto" width="640" height="360">
+                    <!-- HLS source URL -->
+                    <source src="{{ hls_url }}" type="application/x-mpegURL">
+                    <!-- Fallback for non-supported browsers -->
+                    <p class="vjs-no-js">
+                        To view this video, please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
+                    </p>
+                </video>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Initialize the Video.js player
+    var player = videojs('hls-video');
+</script>
+</body>
+</html>
