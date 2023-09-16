@@ -37,7 +37,6 @@ def serve_hls_segment(request, video_id, segment_name):
 
 
 def hls_video_player(request, video_id):
-    video = get_object_or_404(Video, pk=video_id)
     hls_playlist_url = reverse('serve_hls_playlist', args=[video_id])
 
     context = {
@@ -45,3 +44,14 @@ def hls_video_player(request, video_id):
     }
 
     return render(request, 'video_player.html', context)
+
+
+
+def all_videos(request):
+    videos = Video.objects.filter(status='Completed')
+
+    context = {
+        'videos': videos,
+    }
+
+    return render(request, 'all_videos.html', context)

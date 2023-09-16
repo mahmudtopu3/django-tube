@@ -10,8 +10,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         try:
-            #obj = Video.objects.filter(status='Pending').first()
-            obj = Video.objects.first()
+            obj = Video.objects.filter(status='Pending').first()
             if obj:
                 obj.status = 'Processing'
                 obj.is_running = True
