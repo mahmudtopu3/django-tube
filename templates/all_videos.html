@@ -53,18 +53,23 @@
 <div class="container">
     <a href="/"><h1 class="text-center mt-4">Django Tube</h1></a>
     <div class="row mt-5">
-        {% for video in videos %}
-            <div class="col-md-4">
-                <div class="video-card">
-                    <a href="{% url 'hls_video_player' video.slug %}">
-                        <img src="{{ video.thumbnail.url }}" alt="{{ video.name }}">
-                    </a>
-                    <h2 class="video-title">{{ video.name }}</h2>
-                    <p class="video-details">{{ video.created_at|date:"F d, Y" }}</p>
-                    <p class="video-details">Duration: {{ video.duration }} seconds</p>
+        {% if videos %}
+            {% for video in videos %}
+                <div class="col-md-4">
+                    <div class="video-card">
+                        <a href="{% url 'hls_video_player' video.slug %}">
+                            <img src="{{ video.thumbnail.url }}" alt="{{ video.name }}">
+                        </a>
+                        <h2 class="video-title">{{ video.name }}</h2>
+                        <p class="video-details">{{ video.created_at|date:"F d, Y" }}</p>
+                        <p class="video-details">Duration: {{ video.duration }} seconds</p>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        {% else  %}
+
+        <h3 class="text-center mx-auto"> No Videos Found</h3>
+        {% endif %}
     </div>
 </div>
 
