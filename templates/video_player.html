@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>HLS Video Player</title>
+    <title>{{  video.name }} - Django Tube</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -24,9 +24,14 @@
     
 <div class="container-fluid">
     <div class="row">
+        
         <div class="col-md-12 mx-auto " style="background-color:lavender; height: 100vh;">
+            
+           
             <div class="video-container ">
                 <!-- Video.js player -->
+                <a href="/"><h1 class="text-center ">Django Tube</h1></a>
+                <br>
                 <video id="hls-video" class="video-js vjs-default-skin text-center" controls preload="auto" width="640" height="360" autoplay>
                     <!-- HLS source URL -->
                     <source src="{{ hls_url }}" type="application/x-mpegURL">
