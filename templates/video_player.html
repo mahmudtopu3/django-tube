@@ -35,6 +35,10 @@
                         To view this video, please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
                     </p>
                 </video>
+
+                <h1>{{  video.name }}</h1>
+                <p class="video-details">{{ video.created_at|date:"F d, Y" }}</p>
+                <p class="video-details">Duration: {{ video.duration }} seconds</p>
                 
             </div>
         </div>

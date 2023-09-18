@@ -37,10 +37,14 @@ def serve_hls_segment(request, video_id, segment_name):
 
 
 def hls_video_player(request, video_id):
-    hls_playlist_url = reverse('serve_hls_playlist', args=[video_id])
+    video = Video.objects.filter(slug=video_id).first()
+    hls_playlist_url = reverse('serve_hls_playlist', args=[video.id])
+    
+    
 
     context = {
         'hls_url': hls_playlist_url,
+        'video': video,
     }
 
     return render(request, 'video_player.html', context)

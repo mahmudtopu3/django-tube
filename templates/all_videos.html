@@ -51,12 +51,12 @@
 <body>
 
 <div class="container">
-    <h1 class="text-center">Django Tube</h1>
-    <div class="row">
+    <h1 class="text-center mt-4">Django Tube</h1>
+    <div class="row mt-5">
         {% for video in videos %}
             <div class="col-md-4">
                 <div class="video-card">
-                    <a href="{% url 'hls_video_player' video.id %}">
+                    <a href="{% url 'hls_video_player' video.slug %}">
                         <img src="{{ video.thumbnail.url }}" alt="{{ video.name }}">
                     </a>
                     <h2 class="video-title">{{ video.name }}</h2>
